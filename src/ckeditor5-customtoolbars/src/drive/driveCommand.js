@@ -152,6 +152,10 @@ var gdocImport = function (fileId, deleteAfter) {
 			  }).then(
 			  function (response) {
 				  //success
+				  // show loader
+				  window['angularLoaderComponentRef'].zone.run(() => {
+					window['angularLoaderComponentRef'].component.showLoader(true);
+				  });
 				  if (deleteAfter) {
 					  gdocDelete(fileId);
 				  }
@@ -162,6 +166,10 @@ var gdocImport = function (fileId, deleteAfter) {
 			  },
 			  //Failure to load file
 			  function (response) {
+				  // Hide loader
+				  window['angularLoaderComponentRef'].zone.run(() => {
+					window['angularLoaderComponentRef'].component.showLoader(false);
+				  });
 				  if (deleteAfter) {
 					  gdocDelete(fileId);
 				  }
