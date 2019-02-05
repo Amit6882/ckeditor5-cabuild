@@ -144,10 +144,11 @@ var contentFilter = function (htmlData) {
 
 
 var gdocImport = function (fileId, deleteAfter) {
+
+	// Calling 'showLoader()' angular method from javascript to show spinner
 	window['angularLoaderComponentRef'].zone.run(() => {
 		window['angularLoaderComponentRef'].component.showLoader(true);
-	  });
-	console.log("gdocImport");
+	});
   gapi.client.drive.files.export(
 			  {
 				  fileId: fileId,
@@ -155,7 +156,7 @@ var gdocImport = function (fileId, deleteAfter) {
 			  }).then(
 			  function (response) {
 				  //success
-				  // show loader
+				  // Calling 'showLoader()' angular method from javascript to hide spinner
 				  window['angularLoaderComponentRef'].zone.run(() => {
 					window['angularLoaderComponentRef'].component.showLoader(false);
 				  });
@@ -169,7 +170,7 @@ var gdocImport = function (fileId, deleteAfter) {
 			  },
 			  //Failure to load file
 			  function (response) {
-				  // Hide loader
+				  // Calling 'showLoader()' angular method from javascript to hide spinner
 				  window['angularLoaderComponentRef'].zone.run(() => {
 					window['angularLoaderComponentRef'].component.showLoader(false);
 				  });
@@ -222,7 +223,6 @@ var pickerCallback = function (callbackObj) {
 }
 
 var cleanup = function (response) {
-	console.log(response);
 	options.CallBackFrom = "Error";
 	options.tempdata = "";
 	window['angularComponentRef'].zone.run(() => {
@@ -294,7 +294,6 @@ function LoadClient()
 	  },
 	  function (response) {
 		 //console.log("Error");
-		 console.log(response);
 	  });
   }
 }
