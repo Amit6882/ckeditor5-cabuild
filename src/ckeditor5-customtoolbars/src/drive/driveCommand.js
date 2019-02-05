@@ -144,7 +144,10 @@ var contentFilter = function (htmlData) {
 
 
 var gdocImport = function (fileId, deleteAfter) {
-	//console.log("gdocImport");
+	window['angularLoaderComponentRef'].zone.run(() => {
+		window['angularLoaderComponentRef'].component.showLoader(true);
+	  });
+	console.log("gdocImport");
   gapi.client.drive.files.export(
 			  {
 				  fileId: fileId,
@@ -154,7 +157,7 @@ var gdocImport = function (fileId, deleteAfter) {
 				  //success
 				  // show loader
 				  window['angularLoaderComponentRef'].zone.run(() => {
-					window['angularLoaderComponentRef'].component.showLoader(true);
+					window['angularLoaderComponentRef'].component.showLoader(false);
 				  });
 				  if (deleteAfter) {
 					  gdocDelete(fileId);
